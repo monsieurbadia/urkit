@@ -1,0 +1,63 @@
+[single]
+
+component = """
+<template src='./{0}.html' lang='html'>
+  <div class='{0}'></div>
+</template>
+
+<script>
+export default {
+  name: '{0}',
+  props: [],
+  data() {
+    return {}
+  },
+};
+</script>
+
+<style lang='scss' scoped>
+.{0} {
+  position: relative;
+}
+</style>
+"""
+
+spec = ""
+
+[multiple]
+
+component = """
+<template src='./{0}.html' lang='html'></template>
+<style src='./{0}.scss' lang='scss' scoped></style>
+<script src='./{0}.js'></script>
+"""
+
+html = "<div class='{0}'></div>"
+
+style = """.{0} {
+  position: relative;
+}"""
+
+script = """
+export default {
+  name: '{0}',
+  components: {},
+  props: [],
+  data() {
+    return {}
+  },
+  created() {},
+  mounted() {},
+  methods: {},
+};
+"""
+
+spec = """
+describe('{0}', () => {
+  test('a test sample', () => {
+    expect(true).toBe(true);
+  });
+});
+"""
+
+[wasm]

@@ -1,0 +1,26 @@
+[package]
+name = "urkit"
+version = "0.1.0"
+authors = ["monsieurbadia <iam@monsieurbadia.com>"]
+edition = "2018"
+
+[lib]
+name = "urkit"
+path = "src/lib.rs"
+doctest = false
+
+[[bin]]
+name = "urkit"
+path = "src/main.rs"
+doctest = false
+
+[dependencies]
+flume = "0.10.5"
+rayon = "1.5"
+serde = { version = "1.0.126", features = ["derive"] }
+serde_derive = "1.0.126"
+serde_json = "1.0.64"
+structopt = "0.3"
+toml = "0.5"
+
+[dev-dependencies]

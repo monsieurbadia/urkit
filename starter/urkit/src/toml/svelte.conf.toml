@@ -1,0 +1,139 @@
+[single]
+
+component = """
+<script src='./{0}.js'>
+  export let name = '{0}';
+</script>
+
+<style src='./{0}.scss' lang='scss' scoped>
+.{0} {
+  position: relative;
+}
+</style>
+
+<div class='{0}'>{name}</div>
+"""
+
+spec = ""
+
+[multiple]
+
+component = """
+<template src='./{0}.html' lang='html'></template>
+<style src='./{0}.scss' lang='scss' scoped></style>
+<script src='./{0}.js'></script>
+"""
+
+html = "<div class='{0}'>{name}</div>"
+
+style = """.{0} {
+  position: relative;
+}"""
+
+sscript = "let name = '{0}';"
+
+spec = """
+describe('{0}', () => {
+  test('a test sample', () => {
+    expect(true).toBe(true);
+  });
+});
+"""
+
+[wasm]
+
+gitignore = """
+node_modules
+yarn-error.log
+/target
+/dist/js
+"""
+
+cargo_toml = """
+[package]
+name = "example"
+version = "0.1.0"
+authors = ["You <you@example.com>"]
+edition = "2018"
+categories = ["wasm"]
+
+[lib]
+crate-type = ["cdylib"]
+
+[dependencies]
+wasm-bindgen = "0.2.58"
+console_error_panic_hook = "0.1.6"
+
+[dependencies.web-sys]
+version = "0.3.35"
+features = [
+    "console",
+]
+"""
+
+package_json = """
+{
+  "private": true,
+  "name": "{0}",
+  "author": "{1}",
+  "version": "0.1.0",
+  "scripts": {
+    "build": "rimraf dist/js && rollup --config"
+  },
+  "devDependencies": {
+    "@wasm-tool/rollup-plugin-rust": "^1.0.0",
+    "rimraf": "^3.0.2",
+    "rollup": "^1.31.0"
+  },
+}
+"""
+
+# TODO: need to be use as command - yarn add --dev @wasm-tool/rollup-plugin-rust - npm install --save-dev @wasm-tool/rollup-plugin-rust
+
+rollup_config = """
+import rust from "@wasm-tool/rollup-plugin-rust";
+
+export default {
+  input: {
+    example: "Cargo.toml",
+  },
+  output: {
+    dir: "dist/js",
+    format: "iife",
+    sourcemap: true,
+  },
+  plugins: [
+    rust({
+      serverPath: "js/",
+    }),
+  ],
+};
+"""
+
+[[web]]
+
+index = """
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+  </head>
+  <body>
+    <script src="js/example.js"></script>
+  </body>
+</html>
+"""
+
+[[src]]
+
+lib = """
+use wasm_bindgen::prelude::*;
+use web_sys::console;
+
+#[wasm_bindgen(start)]
+pub fn main_js() {
+  console_error_panic_hook::set_once();
+  console::log_1(&JsValue::from("Hello world!"));
+}
+"""
+
