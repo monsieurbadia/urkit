@@ -458,6 +458,11 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "8ccb82d61f80a663efe1f787a51b16b5a51e3314d6ac365b08639f52387b33f3"
 
 [[package]]
+name = "unitest"
+version = "0.1.0"
+source = "git+https://github.com/monsieurbadia/unitest#e4cd60de33448c0e569154cd5337137ee5c228cd"
+
+[[package]]
 name = "urkit"
 version = "0.1.0"
 dependencies = [
@@ -468,6 +473,25 @@ dependencies = [
  "serde_json",
  "structopt",
  "toml",
+ "unitest",
+ "uwa",
+]
+
+[[package]]
+name = "utilcase"
+version = "0.1.0"
+source = "git+https://github.com/monsieurbadia/utilcase#6a246af20152311aeab2f8787b3999a518e4f366"
+dependencies = [
+ "unitest",
+]
+
+[[package]]
+name = "uwa"
+version = "0.1.0"
+source = "git+https://github.com/monsieurbadia/uwa#86d8c772f5a6ffb5db63647def9225aa0ecad44d"
+dependencies = [
+ "unitest",
+ "utilcase",
 ]
 
 [[package]]

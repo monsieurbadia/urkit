@@ -8,6 +8,8 @@ use std::thread;
 use rayon::prelude::ParallelIterator;
 use rayon::prelude::*;
 use structopt::StructOpt;
+use uwa::fp::and_then;
+use uwa::pattern::unwrap_or;
 
 use super::cfg::{Cfg, MultipleCfg, SingleCfg, WasmCfg};
 use super::cmd::{make_cmd, Cmd, CmdKind};
@@ -220,16 +222,3 @@ fn read_conf(path: &Path, query: &str) -> Result<Cfg, String> {
   }
 }
 
-macro and_then {
-  ( $f:expr, $( $x:expr ),* ) => ( $f( $( $x ),* )),
-  () => (),
-}
-
-macro unwrap_or {
-  ( return : $e:expr , $r:expr ) => (
-    match $e { Some(e) => e, None => return $r, }
-  ),
-  ( die : $e:expr ) => (
-    match $e { Some(e) => e, None => return panic!() }
-  ),
-}

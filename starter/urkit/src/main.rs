@@ -1,3 +1,3 @@
 fn main() {
-  urkit::cli::run();
+  urkit::cli::run()
 }
